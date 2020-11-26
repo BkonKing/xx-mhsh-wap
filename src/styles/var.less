@@ -1,0 +1,202 @@
+// Color Palette
+@black: #000;
+@white: #fff;
+@gray-1: #f8f8f8;
+@gray-2: #f0f0f0; // 分割线
+@gray-3: #ebedf0;
+@gray-4: #dcdee0;
+@gray-5: #c8c7cc;
+@gray-6: #aaa;
+@gray-7: #8F8F94; // text-grey
+@gray-8: #383838;
+@red: #f9866b;
+@red-dark: #eb5841;
+@blue: #019aff;
+@blue-dark: #448fe4;
+@orange: #ffc017;
+@orange-dark: #ffa110;
+@orange-light: #fffbe8;
+@green: #55ff7f;
+@green-dark: #55b862;
+@primary: @red-dark;
+
+// Gradient Colors
+@gradient-red: linear-gradient(to right, @red, @red-dark);
+@gradient-orange: linear-gradient(to right, @orange, @orange-dark);
+
+// Component Colors
+@text-color: #222;
+@active-color: #222;
+@active-opacity: 0.7;
+@disabled-opacity: 0.5;
+@background-color: #f2f2f4;
+@background-color-light: #fff;
+@text-link-color: #576b95;
+
+// Padding
+@padding-base: 5px;
+@padding-xs: @padding-base * 2;
+@padding-sm: @padding-base * 3;
+@padding-md: @padding-base * 4;
+@padding-lg: @padding-base * 6;
+@padding-xl: @padding-base * 8;
+
+// Font
+@font-size-xs: 10px;
+@font-size-sm: 22px;
+@font-size-md: 28px;
+@font-size-lg: 30px;
+@font-weight-bold: 500;
+@base-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+  Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB',
+  'Microsoft Yahei', sans-serif;
+@price-integer-font-family: Avenir-Heavy, PingFang SC, Helvetica Neue, Arial,
+  sans-serif;
+
+// Animation
+@animation-duration-base: 0.3s;
+@animation-duration-fast: 0.2s;
+@animation-timing-function-enter: ease-out;
+@animation-timing-function-leave: ease-in;
+
+// Border
+@border-color: @gray-5;
+@border-width-base: 2px;
+@border-radius-sm: 6px;
+@border-radius-md: 10px;
+@border-radius-lg: 16px;
+@border-radius-max: 999px;
+
+@divider-color: @gray-2;
+
+// Tabbar
+@tabbar-height: 98px;
+
+// TabbarItem
+@tabbar-item-active-color: @primary;
+@tabbar-item-icon-size: 36px;
+@tabbar-item-margin-bottom: 10px;
+
+// NavBar
+@nav-bar-height: 88px;
+@nav-bar-arrow-size: 30px;
+@nav-bar-icon-color: @gray-8;
+@nav-bar-text-color: @gray-8;
+@nav-bar-title-font-size: 34px;
+
+// Button
+@button-mini-height: 48px;
+@button-mini-font-size: @font-size-xs;
+@button-small-height: 66px;
+@button-large-height: 100px;
+@button-default-height: 88px;
+@button-default-line-height: 1.2;
+@button-primary-background-color: @red-dark;
+@button-primary-border-color: @red-dark;
+@button-danger-background-color: @red-dark;
+@button-danger-border-color: @red-dark;
+@button-warning-background-color: @orange-dark;
+@button-warning-border-color: @orange-dark;
+
+// Search
+@search-padding: @padding-md;
+@search-content-background-color: @background-color;
+@search-input-height: 46px;
+
+// Picker
+@picker-toolbar-height: 88px;
+@picker-title-line-height: 88px;
+
+// Tab
+@tab-text-color: @gray-7;
+
+// Tabs
+@tabs-line-height: 98px;
+@tabs-card-height: 30px;
+@tabs-bottom-bar-height: 4px;
+
+// DropdownMenu
+@dropdown-menu-height: 66px;
+@dropdown-menu-title-font-size: @font-size-lg;
+@dropdown-menu-title-text-color: @gray-7;
+@dropdown-menu-title-active-text-color: @red-dark;
+@dropdown-menu-title-padding: 0 @padding-lg;
+@dropdown-menu-title-line-height: 66px;
+@dropdown-menu-option-active-color: @red-dark;
+@dropdown-menu-content-max-height: 90%;
+
+// PasswordInput
+@password-input-height: 90px;
+@password-input-margin: 0 @padding-md;
+@password-input-border-radius: 4px;
+@password-input-background-color: @background-color;
+@password-input-dot-size: 22px;
+
+// NumberKeyboard
+@number-keyboard-key-height: 80px;
+
+// Dialog
+@dialog-header-line-height: 48px;
+@dialog-message-line-height: 40px;
+
+// Toast
+@toast-default-width: auto;
+
+// Swipe
+@swipe-indicator-size: 10px;
+@swipe-indicator-margin: 34px;
+@swipe-indicator-inactive-opacity: 0.4;
+
+// NumberKeyboard 
+@number-keyboard-button-background-color: @red-dark;
+
+@flex: {
+  display: flex
+}
+
+@flex-column: {
+  @flex();
+  flex-direction: column;
+}
+
+@flex-column-between: {
+  @flex-column();
+  justify-content: space-between;
+}
+
+@flex-column-around: {
+  @flex-column();
+  justify-content: space-around;
+}
+
+@text-ellipsis: {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-multiple-ellipsis(@lines: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+}
+
+.triangle(@width: 12px, @height: 15px, @color: @red-dark) {
+  width:0px;
+  height:0px;
+  border-bottom-width: @height;
+  border-top-width: @height;
+  border-left-width: @width;
+  border-right-width: @width;
+  border-style: solid;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: @color;
+  border-left-color: transparent;
+}
+
+@relative: {
+  position: relative;
+}
