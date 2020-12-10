@@ -170,60 +170,98 @@
 
       <!-- <div class="fixed-empty"></div> -->
       <div class="bottom-fixed operate-session flex-align-center">
-        <a :href="'tel: '+infoData.customerServiceHotline" class="kf-btn flex-center">
-          <img src="@/assets/img/icon_07.png" />
-        </a>
-        <div v-if="infoData.pay_type == 0" class="cart-btn flex-center">
-          <img src="@/assets/img/icon_06.png" />
-          <div v-if="cart_num > 0" class="cart-num">{{cart_num}}</div>
-        </div>
-        <template v-if="infoData.is_sell_out > 0">
-          <div class="add-btn btn-disabled">{{infoData.sell_out_text}}</div>
-        </template>
-        <template v-else>
-          <template v-if="infoData.pay_type == 0">
-            <template v-if="infoData.goods_type < 3">
-              <div class="add-btn" @click="showFunc('cart')">加入购物车</div>
-              <div class="buy-btn" @click="showFunc('buy')">立即购买</div>
-            </template>
-            <template v-else>
-              <template v-if="infoData.ollage_info.is_start">
-                <template v-if="infoData.dq_collage_type == 1">
-                  <div class="buy-btn btn-linear" @click="showFunc('buy')">立即购买</div>
-                </template>
-                <template v-else>
-                  <template v-if="f_orderid && infoData.f_order_ollage_info && (!infoData.order_ollage_info || infoData.order_ollage_info.status!=0)">
-                    <div class="count-time">剩余<van-count-down ref="countDown" :auto-start="true" :time="infoData.ollage_info.end_time*1000-newTime" @finish="finish">
-                        <template v-slot="timeData">{{ 10 > timeData.hours ? '0' + timeData.hours : timeData.hours }}:{{ 10 > timeData.minutes ? '0' + timeData.minutes : timeData.minutes }}:{{ 10 > timeData.seconds ? '0' + timeData.seconds : timeData.seconds }}
-                        </template>
-                      </van-count-down>结束</div>
-                    <div @click="showFunc('collage')" class="buy-btn btn-linear">一起拼单</div>
-                  </template>
-                  <template v-else>
-                    <template v-if="my_ing_info">
-                      <div class="count-time">剩余<van-count-down ref="countDown" :auto-start="true" :time="infoData.ollage_info.end_time*1000-newTime" @finish="finish">
-                        <template v-slot="timeData">{{ 10 > timeData.hours ? '0' + timeData.hours : timeData.hours }}:{{ 10 > timeData.minutes ? '0' + timeData.minutes : timeData.minutes }}:{{ 10 > timeData.seconds ? '0' + timeData.seconds : timeData.seconds }}
-                        </template>
-                      </van-count-down>结束</div>
-                      <div class="buy-btn btn-linear">邀请好友</div>
-                    </template>
-                    <template v-else>
-                      <div class="add-btn" @click="showFunc('flash')">单独购买￥{{infoData.flash_price/100}}</div>
-                      <div class="buy-btn" @click="showFunc('collage')">发起拼单￥{{infoData.sell_price/100}}</div>
-                    </template>
-                  </template>
-                </template>
-              </template>
-              <template v-else>
-                <div class="add-btn" @click="showFunc('cart')">加入购物车</div>
-                <div v-if="!infoData.is_set" class="buy-btn">开抢提醒</div>
-                <div v-else class="buy-btn btn-disabled">已设提醒</div>
-              </template>
-            </template>
+        <template v-if="isWx">
+          <template v-if="f_orderid > 0">
+            <wx-open-launch-app
+              id="id"
+              class="launch-btn"
+              appid="wx7245d2cb43a093db"
+              :extinfo="extinfo"
+              @error="handleErrorFn"
+              @launch="handleLaunchFn"
+              >
+              <script type="text/wxtag-template">
+                <style>
+                .app-btn,.app-btn img {display: flex;width: 100%;height: 100%;}
+                </style>
+                <div class="app-btn"><img src="https://live.tosolomo.com/library/img/app_img/btn_02.png" /></div>
+              </script>
+            </wx-open-launch-app>
           </template>
           <template v-else>
-            <div class="add-btn credits-info"><img src="@/assets/img/icon_24.png" />{{ableCredits}}</div>
-            <div class="buy-btn btn-linear" @click="showFunc('buy')" data-type="buy">立即兑换</div>
+            <wx-open-launch-app
+              id="id"
+              class="launch-btn"
+              appid="wx7245d2cb43a093db"
+              :extinfo="extinfo"
+              @error="handleErrorFn"
+              @launch="handleLaunchFn"
+              >
+              <script type="text/wxtag-template">
+                <style>
+                .app-btn,.app-btn img {display: flex;width: 100%;height: 100%;}
+                </style>
+                <div class="app-btn"><img src="https://live.tosolomo.com/library/img/app_img/btn_01.png" /></div>
+              </script>
+            </wx-open-launch-app>
+          </template>
+        </template>
+        <template v-else>
+          <a :href="'tel: '+infoData.customerServiceHotline" class="kf-btn flex-center">
+            <img src="@/assets/img/icon_07.png" />
+          </a>
+          <div @click="goApp" v-if="infoData.pay_type == 0" class="cart-btn flex-center">
+            <img src="@/assets/img/icon_06.png" />
+            <div v-if="cart_num > 0" class="cart-num">{{cart_num}}</div>
+          </div>
+          <template v-if="infoData.is_sell_out > 0">
+            <div class="add-btn btn-disabled">{{infoData.sell_out_text}}</div>
+          </template>
+          <template v-else>
+            <template v-if="infoData.pay_type == 0">
+              <template v-if="infoData.goods_type < 3">
+                <div class="add-btn" @click="showFunc('cart')">加入购物车</div>
+                <div class="buy-btn" @click="showFunc('buy')">立即购买</div>
+              </template>
+              <template v-else>
+                <template v-if="infoData.ollage_info.is_start">
+                  <template v-if="infoData.dq_collage_type == 1">
+                    <div class="buy-btn btn-linear" @click="showFunc('buy')">立即购买</div>
+                  </template>
+                  <template v-else>
+                    <template v-if="f_orderid && infoData.f_order_ollage_info && (!infoData.order_ollage_info || infoData.order_ollage_info.status!=0)">
+                      <div class="count-time">剩余<van-count-down ref="countDown" :auto-start="true" :time="infoData.ollage_info.end_time*1000-newTime" @finish="finish">
+                          <template v-slot="timeData">{{ 10 > timeData.hours ? '0' + timeData.hours : timeData.hours }}:{{ 10 > timeData.minutes ? '0' + timeData.minutes : timeData.minutes }}:{{ 10 > timeData.seconds ? '0' + timeData.seconds : timeData.seconds }}
+                          </template>
+                        </van-count-down>结束</div>
+                      <div @click="showFunc('collage')" class="buy-btn btn-linear">一起拼单</div>
+                    </template>
+                    <template v-else>
+                      <template v-if="my_ing_info">
+                        <div class="count-time">剩余<van-count-down ref="countDown" :auto-start="true" :time="infoData.ollage_info.end_time*1000-newTime" @finish="finish">
+                          <template v-slot="timeData">{{ 10 > timeData.hours ? '0' + timeData.hours : timeData.hours }}:{{ 10 > timeData.minutes ? '0' + timeData.minutes : timeData.minutes }}:{{ 10 > timeData.seconds ? '0' + timeData.seconds : timeData.seconds }}
+                          </template>
+                        </van-count-down>结束</div>
+                        <div class="buy-btn btn-linear">邀请好友</div>
+                      </template>
+                      <template v-else>
+                        <div class="add-btn" @click="showFunc('flash')">单独购买￥{{infoData.flash_price/100}}</div>
+                        <div class="buy-btn" @click="showFunc('collage')">发起拼单￥{{infoData.sell_price/100}}</div>
+                      </template>
+                    </template>
+                  </template>
+                </template>
+                <template v-else>
+                  <div class="add-btn" @click="showFunc('cart')">加入购物车</div>
+                  <div v-if="!infoData.is_set" class="buy-btn">开抢提醒</div>
+                  <div v-else class="buy-btn btn-disabled">已设提醒</div>
+                </template>
+              </template>
+            </template>
+            <template v-else>
+              <div class="add-btn credits-info"><img src="@/assets/img/icon_24.png" />{{ableCredits}}</div>
+              <div class="buy-btn btn-linear" @click="showFunc('buy')" data-type="buy">立即兑换</div>
+            </template>
           </template>
         </template>
       </div>
@@ -337,6 +375,7 @@
 import { Swipe, SwipeItem, Icon, ImagePreview, NavBar, CountDown, Toast } from 'vant'
 import remindSwal from '@/components/remind-swal'
 import { getGoodsDetail } from '@/api/share.js'
+import { openApp, isWx, txJssdk } from '@/utils/util.js'
 export default {
   components: {
     [Swipe.name]: Swipe,
@@ -403,12 +442,17 @@ export default {
 
       // show: false,
       swiperArr: [], // 轮播图
-      skuPicArr: [] // 规格图
+      skuPicArr: [], // 规格图
+      extinfo: '',
+      isWx: false
     }
   },
   created () {
-    this.goodsId = this.$route.query.id || 11
+    this.goodsId = this.$route.query.id
     this.f_orderid = this.$route.query.f_id ? this.$route.query.f_id : ''
+    this.extinfo = 'page_type=1&id=' + this.goodsId + '&f_id=' + this.f_orderid
+    this.isWx = isWx()
+    txJssdk()
     this.getData()
   },
   watch: {
@@ -473,29 +517,30 @@ export default {
     *显示/隐藏弹窗(规格)
     */
     showFunc (type = '', f_orderid = '') {
-      if (type && type === 'collage') {
-        this.is_collage = true
-      } else {
-        this.is_collage = false
-      }
-      // this.is_collage = (type && type === 'collage' ? true : false)
-      this.btn_type = type && (type === 'buy' || type === 'collage' || type === 'flash') ? 'buy' : 'cart'
-      this.f_id = f_orderid
+      this.goApp()
+      // if (type && type === 'collage') {
+      //   this.is_collage = true
+      // } else {
+      //   this.is_collage = false
+      // }
+      // // this.is_collage = (type && type === 'collage' ? true : false)
+      // this.btn_type = type && (type === 'buy' || type === 'collage' || type === 'flash') ? 'buy' : 'cart'
+      // this.f_id = f_orderid
 
-      if (this.infoData.goods_type == 3 && this.infoData.ollage_info.is_start == 1) {
-        if (this.is_collage) {
-          this.goods.s_price = this.skuList[this.typeVal].p_price
-          this.goods.pay_price = this.skuList[this.typeVal].p_price
-          this.goods.credits = this.skuList[this.typeVal].p_credits
-        } else {
-          this.goods.s_price = this.skuList[this.typeVal].o_price
-          this.goods.pay_price = this.skuList[this.typeVal].o_price
-        }
-      } else {
-        this.goods.goods_type = 1
-      }
+      // if (this.infoData.goods_type == 3 && this.infoData.ollage_info.is_start == 1) {
+      //   if (this.is_collage) {
+      //     this.goods.s_price = this.skuList[this.typeVal].p_price
+      //     this.goods.pay_price = this.skuList[this.typeVal].p_price
+      //     this.goods.credits = this.skuList[this.typeVal].p_credits
+      //   } else {
+      //     this.goods.s_price = this.skuList[this.typeVal].o_price
+      //     this.goods.pay_price = this.skuList[this.typeVal].o_price
+      //   }
+      // } else {
+      //   this.goods.goods_type = 1
+      // }
 
-      this.isShow = !this.isShow
+      // this.isShow = !this.isShow
     },
     /*
     *显示/隐藏弹窗（基础保障）
@@ -547,7 +592,6 @@ export default {
         nowSku.notAdd = true
         return
       }
-      console.log(456)
       if (nowSku.count + types > 0) {
         nowSku.count = parseInt(nowSku.count) + types
         nowSku.notAdd = false
@@ -583,6 +627,29 @@ export default {
       } else {
         this.showSwal = false
       }
+    },
+    handleLaunchFn (e) {
+      alert('成功')
+      // alert(JSON.stringify(e.detail))
+      console.log('success', e)
+    },
+    handleErrorFn (e) {
+      console.log('fail', e.detail)
+      this.$router.push({
+        path: '/upload',
+        query: {
+          appParams: 'page_type=1&id=' + this.infoData.id + '&f_id=' + this.f_orderid
+        }
+      })
+    },
+    // 跳转到app
+    goApp () {
+      // const params = {
+      //   id: this.goodsId,
+      //   f_id: this.f_orderid
+      // }
+      const params = 'page_type=1&id=' + this.infoData.id + '&f_id=' + this.f_orderid
+      openApp(params)
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -1174,5 +1241,10 @@ div.btn-disabled {
   display: inline;
   color: #eb5841;
   font-size: 24px;
+}
+
+.launch-btn {
+  width: 100%;
+  height: 100%;
 }
 </style>

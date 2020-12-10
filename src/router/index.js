@@ -30,6 +30,15 @@ const routes = [
         /* webpackChunkName: 'neighbours' */
         '@/views/neighbours.vue'
       )
+  },
+  {
+    path: '/upload',
+    name: 'upload',
+    component: () =>
+      import(
+        /* webpackChunkName: 'upload' */
+        '@/views/upload.vue'
+      )
   }
 ]
 

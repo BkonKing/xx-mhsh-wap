@@ -60,8 +60,8 @@ module.exports = {
     proxy: {
       /** 解决本地测试跨域问题 */
       '/api': {
-        // target: 'https://test.tosolomo.com/app/api/v1',
-        target: 'http://www.xxkj.brawlive.com/app/api/v1',
+        target: 'https://live.tosolomo.com/app/api/v1',
+        // target: 'http://192.168.1.103/app/api/v1',
         // target: 'https://test.mhshjy.com/app/api/v1',
         // target: 'https://www.fastmock.site/mock/c30751817f92f0a4855537591d860a97/app/api/v1',
         pathRewrite: {

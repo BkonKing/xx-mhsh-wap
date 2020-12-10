@@ -38,18 +38,21 @@ export default {
   data () {
     return {
       id: '',
+      params: {},
       info: {}
     }
   },
   created () {
-    this.id = this.$route.query.id
+    this.params = this.$route.query
     this.visitorCode()
   },
   methods: {
     // 获取邀约信息
     visitorCode () {
       visitorCode({
-        yy_id: this.id
+        uid: this.params.uid,
+        yy_id: this.params.id,
+        project_id: this.params.project_id
       }).then((res) => {
         this.info = res.data
       })

@@ -65,7 +65,22 @@
         </div>
       </div>
     </div>
-    <button class="app-btn" @click="openApp">在APP内打开</button>
+    <button v-if="isWx" class="app-btn">
+      <wx-open-launch-app
+        id="id"
+        class="launch-btn"
+        appid="wx7245d2cb43a093db"
+        :extinfo="extinfo"
+        @error="handleErrorFn"
+        @launch="handleLaunchFn"
+        >
+        <script type="text/wxtag-template">
+          <div class="btn" style="color: #fff;
+          font-size: 13px">在APP内打开</div>
+        </script>
+      </wx-open-launch-app>
+    </button>
+    <button v-else class="app-btn" @click="goApp">在APP内打开</button>
   </div>
 </template>
 
@@ -75,6 +90,7 @@ import UserInfo from '@/components/user-info'
 import TfAlert from '@/components/tf-alert'
 import tfImageList from '@/components/tf-image-list'
 import { getActivityInfo, getArticleInfo, getPostBarInfo } from '@/api/share'
+import { openApp, isWx, txJssdk } from '@/utils/util.js'
 
 export default {
   components: {
@@ -100,7 +116,9 @@ export default {
         comments: '',
         ctime: ''
       },
-      isLoading: false
+      isLoading: false,
+      extinfo: '',
+      isWx: false
     }
   },
   created () {
@@ -108,6 +126,9 @@ export default {
     this.articleType = articleType
     this.id = id
     this.getInfo()
+    this.extinfo = 'page_type=2&articleType=' + this.articleType + '&id=' + this.id
+    this.isWx = isWx()
+    txJssdk()
   },
   methods: {
     // 根据类型获取对应的详情
@@ -179,7 +200,25 @@ export default {
         this.isLoading = false
       })
     },
-    openApp () {}
+    // 跳转到app
+    goApp () {
+      const params = 'page_type=2&articleType=' + this.articleType + '&id=' + this.id
+      openApp(params)
+    },
+    handleLaunchFn (e) {
+      // alert('成功')
+      // alert(JSON.stringify(e.detail))
+      console.log('success', e)
+    },
+    handleErrorFn (e) {
+      console.log('fail', e.detail)
+      this.$router.push({
+        path: '/upload',
+        query: {
+          appParams: 'page_type=1&id=' + this.infoData.id + '&f_id=' + this.f_orderid
+        }
+      })
+    }
   },
   filters: {
     numberText (value) {
