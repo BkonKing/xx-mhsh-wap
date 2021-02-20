@@ -87,8 +87,7 @@ export default {
   left: 92px;
   width: 436px;
   height: 76px;
-  background-image: url('../assets/imgs/butler_yaoyue.png');
-  background-size: contain;
+  background: url('../assets/imgs/butler_yaoyue.png') no-repeat center center / 100% 100%;
 }
 
 .share-name__text {

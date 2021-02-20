@@ -169,7 +169,7 @@
       </div>
 
       <!-- <div class="fixed-empty"></div> -->
-      <div class="bottom-fixed operate-session flex-align-center">
+      <div :class="[isWx ? '' : 'flex-align-center','bottom-fixed operate-session']">
         <template v-if="isWx">
           <template v-if="f_orderid > 0">
             <wx-open-launch-app
@@ -182,7 +182,8 @@
               >
               <script type="text/wxtag-template">
                 <style>
-                .app-btn,.app-btn img {display: flex;width: 100%;height: 100%;}
+                .app-btn {width: 100%;height: 100%;font-size: 0;}
+                div.app-btn img {width: 100%;height: auto;}
                 </style>
                 <div class="app-btn"><img src="https://live.tosolomo.com/library/img/app_img/btn_02.png" /></div>
               </script>
@@ -199,7 +200,8 @@
               >
               <script type="text/wxtag-template">
                 <style>
-                .app-btn,.app-btn img {display: flex;width: 100%;height: 100%;}
+                .app-btn {width: 100%;height: 100%;font-size: 0;}
+                div.app-btn img {width: 100%;height: auto;}
                 </style>
                 <div class="app-btn"><img src="https://live.tosolomo.com/library/img/app_img/btn_01.png" /></div>
               </script>
@@ -629,17 +631,13 @@ export default {
       }
     },
     handleLaunchFn (e) {
-      alert('成功')
       // alert(JSON.stringify(e.detail))
       console.log('success', e)
     },
     handleErrorFn (e) {
       console.log('fail', e.detail)
       this.$router.push({
-        path: '/upload',
-        query: {
-          appParams: 'page_type=1&id=' + this.infoData.id + '&f_id=' + this.f_orderid
-        }
+        path: '/upload'
       })
     },
     // 跳转到app
@@ -834,6 +832,7 @@ export default {
   z-index: 20;
   background-color: #fff;
   position: absolute;
+  align-items: flex-start !important;
 }
 .kf-btn,.cart-btn {
   width: 100px;
@@ -1244,6 +1243,7 @@ div.btn-disabled {
 }
 
 .launch-btn {
+  float: left;
   width: 100%;
   height: 100%;
 }

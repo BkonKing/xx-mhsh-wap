@@ -76,7 +76,7 @@
         >
         <script type="text/wxtag-template">
           <div class="btn" style="color: #fff;
-          font-size: 13px">在APP内打开</div>
+          font-size: 16px">在APP内打开</div>
         </script>
       </wx-open-launch-app>
     </button>
@@ -213,10 +213,7 @@ export default {
     handleErrorFn (e) {
       console.log('fail', e.detail)
       this.$router.push({
-        path: '/upload',
-        query: {
-          appParams: 'page_type=1&id=' + this.infoData.id + '&f_id=' + this.f_orderid
-        }
+        path: '/upload'
       })
     }
   },
@@ -235,6 +232,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.tf-card-header {
+  padding-bottom: 30px;
+}
 /deep/ .user-info__left-box {
   .tf-space-around {
     flex: 1;
@@ -257,6 +257,7 @@ export default {
   }
   .tf-card {
     margin-top: 40px;
+    padding: 0 30px;
   }
 }
 .tf-image-box {
@@ -268,8 +269,9 @@ export default {
   }
 }
 .activity-footer {
+  display: none;
   margin-top: 35px;
-  @flex();
+  // @flex();
   padding: 20px 0;
   border-top: 1px solid @divider-color;
   .tf-icon {
@@ -377,18 +379,25 @@ export default {
 .like-active::before {
   color: @orange-dark;
 }
+.tf-card-content {
+  padding: 30px 0;
+  color: #666;
+  font-size: 28px;
+  line-height: 52px;
+  word-break: break-all;
+}
 .app-btn {
-  width: 3.8rem;
-  height: 1rem;
+  width: 4rem;
+  height: 1.2rem;
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 50%;
-  margin-left: -1.9rem;
+  margin-left: -2rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.6rem;
   background-image: linear-gradient(to right, #f9866b, #eb5841);
   color: #fff;
-  font-size: 0.3rem;
+  font-size: 0.4rem;
   text-align: center;
   z-index: 2;
   box-shadow: 0.15rem 0.15rem 0.3rem #999;
