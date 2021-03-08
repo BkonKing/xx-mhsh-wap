@@ -665,6 +665,7 @@ export default {
 .scroll-body {
   max-height: calc(100% - 186px);
   overflow-y: auto;
+  overflow-x: hide;
 }
 /*轮播*/
 .banner {
