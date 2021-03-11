@@ -25,6 +25,31 @@ export function getPostBarInfo (params) {
   return request.get('/share/postbar/getPostBarInfo', { params })
 }
 
+/**
+ * 获取影片详情
+ * @param {string} film_id 电影ID
+ */
+export function getfilminfo (data) {
+  return request.post('/film/filmnotoken/getfilminfo', data)
+}
+
+/**
+ * 根据城市获取所有县影院数量
+ * @param {string} cinema_id 影院ID
+ */
+export function getCinemadetail (data) {
+  return request.post('/film/filmnotoken/cinemadetail', data)
+}
+
+/**
+ * 影院详情（排期接口）
+ * @param {string} cinema_id 影院ID
+ * @param {string} film_no 影片编码
+ */
+export function getCinemaschedu (data) {
+  return request.post('/film/filmnotoken/cinemaschedu', data)
+}
+
 export function getSignature (data) {
   return request.post('/ulogin/wx/signature', data)
 }

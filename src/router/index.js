@@ -39,6 +39,24 @@ const routes = [
         /* webpackChunkName: 'upload' */
         '@/views/upload.vue'
       )
+  },
+  {
+    path: '/filmDetails',
+    name: 'filmDetails',
+    component: () =>
+      import(
+        /* webpackChunkName: 'filmDetails' */
+        '@/views/filmDetails.vue'
+      )
+  },
+  {
+    path: '/cinemaDetails',
+    name: 'cinemaDetails',
+    component: () =>
+      import(
+        /* webpackChunkName: 'cinemaDetails' */
+        '@/views/cinemaDetails.vue'
+      )
   }
 ]
 
