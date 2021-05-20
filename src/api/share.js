@@ -53,3 +53,8 @@ export function getCinemaschedu (data) {
 export function getSignature (data) {
   return request.post('/ulogin/wx/signature', data)
 }
+
+// 任务详情
+export function getTaskInfo (data) {
+  return request.post('/share/linli/linli_task_info', data)
+}

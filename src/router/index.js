@@ -57,6 +57,15 @@ const routes = [
         /* webpackChunkName: 'cinemaDetails' */
         '@/views/cinemaDetails.vue'
       )
+  },
+  {
+    path: '/taskDetail',
+    name: 'taskDetail',
+    component: () =>
+      import(
+        /* webpackChunkName: 'taskDetail' */
+        '@/views/task-detail.vue'
+      )
   }
 ]
 
