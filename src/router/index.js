@@ -66,7 +66,17 @@ const routes = [
         /* webpackChunkName: 'taskDetail' */
         '@/views/task-detail.vue'
       )
+  },
+  {
+    path: '/fiveCenter',
+    name: 'fiveCenter',
+    component: () =>
+      import(
+        /* webpackChunkName: 'fiveCenter' */
+        '@/views/fiveCenter.vue'
+      )
   }
+
 ]
 
 const router = new VueRouter({
