@@ -140,7 +140,7 @@ export default {
   created () {
     this.isShare = this.$route.query.share
     if (this.isShare) {
-      this.extinfo = `page_type=6&frameUrl=${escape(location.href.split('?')[0])}`
+      this.extinfo = `page_type=6&frameUrl=${location.href.split('?')[0]}`
       this.isWx = isWx()
       txJssdk()
     }
