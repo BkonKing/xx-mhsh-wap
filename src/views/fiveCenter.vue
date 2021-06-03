@@ -19,7 +19,7 @@
       </template>
     </van-nav-bar>
     <div class="content">
-      <img src="@/assets/imgs/专题页_02.jpg" />
+      <img class="img1" src="@/assets/imgs/专题页_02.jpg" />
       <!-- <img src="@/assets/imgs/专题页_03.jpg" /> -->
       <div class="info">
         生活品质有多高，不仅与房子有关，<br />
@@ -89,7 +89,7 @@
           id="id"
           class="launch-btn"
           appid="wx7245d2cb43a093db"
-          extinfo="page_type=6"
+          :extinfo="extinfo"
           @error="handleErrorFn"
           @launch="handleLaunchFn"
         >
@@ -133,12 +133,14 @@ export default {
           el: '.swiper-pagination'
         }
       },
-      isWx: false
+      isWx: false,
+      extinfo: ''
     }
   },
   created () {
     this.isShare = this.$route.query.share
     if (this.isShare) {
+      this.extinfo = `page_type=6&frameUrl=${escape(location.href.split('?')[0])}`
       this.isWx = isWx()
       txJssdk()
     }
@@ -165,7 +167,7 @@ export default {
           title: '美好生活家园 五大中心',
           description: '社区居民活动中心，城市居民体验中心',
           thumb: '',
-          contentUrl: 'http://192.168.1.107:8110/#/fiveCenter?share=1'
+          contentUrl: 'http://live.tosolomo.com/wap/#/fiveCenter?share=1'
         }
       })
     },
@@ -186,6 +188,7 @@ export default {
         1: {
           name: '叶县美好生活家园运营服务中心',
           address: '河南省平顶山市叶县城关乡昆阳大道北段888号美好生活家园运营服务中心',
+          btnText: '目的地',
           phoneNumber: '0375-8899518',
           lon: '113.37625',
           lat: '33.652706'
@@ -193,7 +196,8 @@ export default {
         2: {
           name: '滑县天宏美好生活家园',
           address: '河南省滑县新区珠江路与滑兴路交叉口天宏美好生活家园',
-          phoneNumber: '8896666',
+          btnText: '目的地',
+          phoneNumber: '0372－8870880',
           lon: '114.552038',
           lat: '35.528047'
         }
@@ -210,7 +214,8 @@ export default {
         extra: {
           name: '叶县美好生活家园售楼部',
           address: '河南省平顶山市叶县城关乡昆阳大道北段888号美好生活家园售楼部',
-          phoneNumber: '0372－8870880',
+          btnText: '目的地',
+          phoneNumber: '8896666',
           lon: '113.37625',
           lat: '33.652706'
         }
@@ -218,7 +223,7 @@ export default {
     },
     // 跳转到app
     goApp () {
-      openApp('page_type=6')
+      openApp(this.extinfo)
     },
     handleLaunchFn (e) {
       // alert(JSON.stringify(e.detail))
@@ -331,6 +336,12 @@ export default {
       display: block;
       width: 100%;
     }
+    .img1 {
+      height: 632px;
+    }
+    .img {
+      height: 880px;
+    }
     .info {
       width: 100%;
       height: 895px;
@@ -352,31 +363,34 @@ export default {
     }
     .item1 {
       position: relative;
+      height: 880px;
       .imgBtn {
         width: 160px;
-        height: 270px;
+        height: 265px;
         position: absolute;
-        right: 24px;
-        bottom: 70px;
+        right: 26px;
+        bottom: 75px;
       }
     }
     .item2 {
       position: relative;
+      height: 460px;
       .imgBtn {
         width: 160px;
-        height: 270px;
+        height: 265px;
         position: absolute;
-        right: 24px;
-        bottom: 80px;
+        right: 26px;
+        bottom: 85px;
       }
     }
     .item3 {
       position: relative;
+      height: 1100px;
       .imgBtn {
         width: 160px;
         height: 270px;
         position: absolute;
-        right: 24px;
+        right: 26px;
         bottom: 80px;
       }
     }
@@ -389,6 +403,10 @@ export default {
       width: 100%;
       height: 100%;
     }
+  }
+  .app-btn {
+    background-image: linear-gradient(90deg, #00a0e940, #00a0e9);
+    box-shadow: 12px 12px 20px #22222294;
   }
 }
 </style>
