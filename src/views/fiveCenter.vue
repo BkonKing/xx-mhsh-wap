@@ -1,6 +1,13 @@
 <template>
   <div class="fiveCenter">
-    <van-nav-bar v-if="!isShare" :fixed="true" :border="false" placeholder @click-left="goback">
+    <van-nav-bar
+      v-if="!isShare"
+      :fixed="true"
+      :border="false"
+      placeholder
+      left-arrow
+      @click-left="goback"
+    >
       <template #title>
         <div class="title">
           五大中心
