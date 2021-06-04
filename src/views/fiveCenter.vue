@@ -1,18 +1,12 @@
 <template>
   <div class="fiveCenter">
-    <van-nav-bar
-      :fixed="true"
-      :border="false"
-      placeholder
-      :left-arrow="!isShare"
-      @click-left="goback"
-    >
+    <van-nav-bar v-if="!isShare" :fixed="true" :border="false" placeholder @click-left="goback">
       <template #title>
         <div class="title">
           五大中心
         </div>
       </template>
-      <template v-if="!isShare" #right>
+      <template #right>
         <div class="rightIcon" @click="share">
           <i class="tf-icon tf-icon-fenxiang2"></i>
         </div>
