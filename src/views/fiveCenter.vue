@@ -171,7 +171,7 @@ export default {
         extra: {
           title: '美好生活家园 五大中心',
           description: '社区居民活动中心，城市居民体验中心',
-          thumb: 'fs://mhjy/zhuanti.png',
+          thumb: 'widget://res/zhuanti.jpg',
           type,
           contentUrl: 'http://live.tosolomo.com/wap/#/fiveCenter?share=1'
         }
