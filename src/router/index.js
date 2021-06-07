@@ -75,6 +75,15 @@ const routes = [
         /* webpackChunkName: 'fiveCenter' */
         '@/views/fiveCenter.vue'
       )
+  },
+  {
+    path: '/questionnaire',
+    name: 'questionnaire',
+    component: () =>
+      import(
+        /* webpackChunkName: 'questionnaire' */
+        '@/views/questionnaire.vue'
+      )
   }
 
 ]

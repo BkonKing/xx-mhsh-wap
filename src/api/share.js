@@ -58,3 +58,10 @@ export function getSignature (data) {
 export function getTaskInfo (data) {
   return request.post('/share/linli/linli_task_info', data)
 }
+
+// 问卷投票
+export function getWjtpInfo (params) {
+  return request.get('/share/wjtp/getWjtpInfo', {
+    params
+  })
+}

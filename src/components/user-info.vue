@@ -8,7 +8,6 @@
     >
       <img
         v-if="avatar"
-        v-imageCach="avatar"
         class="tf-mr-base tf-avatar"
         :src="avatar"
         mode="aspectFit"
