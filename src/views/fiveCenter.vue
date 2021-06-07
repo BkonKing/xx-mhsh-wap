@@ -166,7 +166,6 @@ export default {
       })
     },
     share (type) {
-      console.log(type)
       top.api.sendEvent({
         name: 'wxShare',
         extra: {
