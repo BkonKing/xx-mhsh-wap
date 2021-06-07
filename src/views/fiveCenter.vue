@@ -14,7 +14,7 @@
         </div>
       </template>
       <template #right>
-        <div class="rightIcon" @click="share">
+        <div class="rightIcon" @click="shareShow = true">
           <i class="tf-icon tf-icon-fenxiang2"></i>
         </div>
       </template>
@@ -102,11 +102,13 @@
       </button>
       <button v-else class="app-btn" @click="goApp">在APP内打开</button>
     </template>
+    <tf-share v-model="shareShow" @share="share"> </tf-share>
   </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import tfShare from '@/components/tf-share'
 import 'swiper/css/swiper.min.css'
 import { NavBar } from 'vant'
 import { openApp, isWx, txJssdk } from '@/utils/util.js'
@@ -114,7 +116,8 @@ export default {
   components: {
     [NavBar.name]: NavBar,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    tfShare
   },
   data () {
     return {
@@ -135,7 +138,8 @@ export default {
         }
       },
       isWx: false,
-      extinfo: ''
+      extinfo: '',
+      shareShow: false
     }
   },
   created () {
@@ -161,13 +165,15 @@ export default {
         name: 'goback'
       })
     },
-    share () {
+    share (type) {
+      console.log(type)
       top.api.sendEvent({
         name: 'wxShare',
         extra: {
           title: '美好生活家园 五大中心',
           description: '社区居民活动中心，城市居民体验中心',
-          thumb: '',
+          thumb: 'fs://mhjy/zhuanti.png',
+          type,
           contentUrl: 'http://live.tosolomo.com/wap/#/fiveCenter?share=1'
         }
       })
