@@ -5,8 +5,6 @@
       :fixed="true"
       placeholder
       :border="false"
-      left-arrow
-      @click-left="$router.go(-1)"
     >
     </van-nav-bar>
     <div class="tf-body-container">
@@ -157,7 +155,6 @@ export default {
           id: res.data.task_id
         }
         this.infoData = res.data
-        this.getShareInfo()
         if (!this.isUp) {
           this.receiverInfo = res.data.user_task_data
         }
