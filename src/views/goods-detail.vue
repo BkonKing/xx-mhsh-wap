@@ -454,7 +454,6 @@ export default {
     this.f_orderid = this.$route.query.f_id ? this.$route.query.f_id : ''
     this.extinfo = 'page_type=1&id=' + this.goodsId + '&f_id=' + this.f_orderid
     this.isWx = isWx()
-    txJssdk()
     this.getData()
   },
   watch: {
@@ -491,6 +490,7 @@ export default {
           this.goods.goods_name = res.data.goods_name
           this.goods.goods_type = res.data.goods_type
           this.goods.tip_text = res.data.tip_text
+          txJssdk(res.data.goods_name)
           if (res.data.goods_type === 3) {
             this.goods.sign_url = res.data.sign_url
             if (this.is_collage) {
