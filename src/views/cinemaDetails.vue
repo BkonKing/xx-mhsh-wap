@@ -157,7 +157,6 @@ export default {
   },
   created () {
     this.isWx = isWx()
-    txJssdk()
     this.pageInit()
   },
   mounted () {
@@ -180,6 +179,10 @@ export default {
         cinema_id: this.cinemaId
       }).then(({ data }) => {
         this.filmList = data.cinema_info
+        txJssdk({
+          title: `去${this.title}看电影，一起吗？`,
+          desc: '来看下最近有什么好电影吧~'
+        })
         if (this.filmList && this.filmList.length) {
           // 从选择影院进入，带有filmNo则选中到当前影片，否则默认选中第一个
           if (this.filmNo) {

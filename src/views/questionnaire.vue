@@ -181,7 +181,6 @@ export default {
   },
   created () {
     this.isWx = isWx()
-    txJssdk()
     this.wjtpId = this.$route.query.id
     this.projectId = this.$route.query.projectId
     this.getWjtpInfo()
@@ -197,6 +196,11 @@ export default {
         const { wjtp_info, item } = res.data
         this.wjtp_info = wjtp_info
         this.title = this.wjtp_info.wjtp_type == '1' ? '问卷' : '投票'
+        txJssdk({
+          title: this.wjtp_info.title,
+          desc: this.wjtp_info.remarks,
+          imgUrl: `https://live.tosolomo.com/library/img/app_img/${this.wjtp_info.wjtp_type == '1' ? 'wenjuan' : 'toupiao'}.png`
+        })
         // 遍历将可能答案为''的转为[]
         this.voteList = item.map((obj) => {
           // 多选，空则返回空数组

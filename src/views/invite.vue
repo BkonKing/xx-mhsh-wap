@@ -30,6 +30,7 @@
 <script>
 import { NavBar } from 'vant'
 import { visitorCode } from '@/api/share'
+import { txJssdk } from '@/utils/util.js'
 
 export default {
   components: {
@@ -55,6 +56,11 @@ export default {
         project_id: this.params.project_id
       }).then((res) => {
         this.info = res.data
+        txJssdk({
+          title: '[访客通行证]' + this.info.project_name,
+          desc: '有效日期：' + this.info.yxtime,
+          imgUrl: 'https://live.tosolomo.com/library/img/app_img/wx_code.png'
+        })
       })
     }
   }

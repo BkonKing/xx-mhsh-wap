@@ -172,7 +172,6 @@ export default {
     this.getData()
     this.extinfo = 'page_type=5&taskId=' + this.taskId
     this.isWx = isWx()
-    txJssdk()
   },
   mounted () {},
   methods: {
@@ -185,6 +184,11 @@ export default {
           id: res.data.task_id
         }
         this.infoData = res.data
+        txJssdk({
+          title: this.infoData.task_title,
+          desc: this.infoData.task_desc,
+          imgUrl: 'https://live.tosolomo.com/library/img/app_img/task_share.jpg'
+        })
         if (res.popup_data.is_popup == 1) {
           this.confirmShow = true
           this.confirm.modelTit = res.popup_data.popup_text

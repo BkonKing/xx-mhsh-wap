@@ -490,7 +490,6 @@ export default {
           this.goods.goods_name = res.data.goods_name
           this.goods.goods_type = res.data.goods_type
           this.goods.tip_text = res.data.tip_text
-          txJssdk(res.data.goods_name)
           if (res.data.goods_type === 3) {
             this.goods.sign_url = res.data.sign_url
             if (this.is_collage) {
@@ -503,6 +502,19 @@ export default {
           if (res.data.goods_type === 2) {
             this.goods.special_bargain_type = res.data.special_bargain_type
           }
+          let title, desc
+          if (res.data.goods_type == 3 && res.data.dq_collage_type == 2) {
+            title = '【拼团￥' + res.data.sell_price / 100 + '】我发现一件好货，一起拼优惠！'
+            desc = '[原价￥' + res.data.original_price / 100 + ']' + res.data.goods_name
+          } else {
+            title = res.data.goods_name
+            desc = '好货分享给你！'
+          }
+          txJssdk({
+            title: title,
+            desc: desc,
+            imgUrl: res.data.share_img
+          })
           // if(this.infoData.goods_type == 3 && !this.is_collage){
           //   this.goods.s_price = this.skuList[index].o_price
           //   this.goods.pay_price = this.skuList[index].o_price

@@ -23,8 +23,8 @@ export function isWx () {
   }
 }
 
-export function txJssdk (title) {
-  // 'http://192.168.1.107:8110/#/goodsDetail?id=654'
+export function txJssdk ({ title, imgUrl, desc }) {
+  // console.log(title, imgUrl, desc)
   let sign_url = ''
   if (window.__wxjs_is_wkwebview === true) {
     // 如果当前设备是IOS
@@ -37,7 +37,7 @@ export function txJssdk (title) {
     share_url: sign_url
   }).then(res => {
     wxsdk.config({
-      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
+      debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
       appId: res.data.appId, // 必填，公众号的唯一标识
       timestamp: res.data.timestamp, // 必填，生成签名的时间戳
       nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
@@ -57,18 +57,19 @@ export function txJssdk (title) {
         }
       })
       wxsdk.updateTimelineShareData({
-        title: title,
-        link: sign_url,
-        imgUrl: '',
+        title,
+        link: window.location.href,
+        imgUrl,
         success: function () {
         },
         cancel: function () {
         }
       })
       wxsdk.updateAppMessageShareData({
-        title: title, // 分享标题
-        link: sign_url, // 分享链接，该链接域名必须与当前企业的可信域名一致
-        imgUrl: '', // 分享图标
+        title, // 分享标题
+        link: window.location.href, // 分享链接，该链接域名必须与当前企业的可信域名一致
+        desc,
+        imgUrl, // 分享图标
         success: function () {
           // 用户确认分享后执行的回调函数
           console.log('成功')

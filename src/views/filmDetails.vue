@@ -13,20 +13,12 @@
               {{ filmInfo.type }}
             </div>
             <!-- 时长/地区 -->
-            <div class="film-duration">
-              {{ filmInfo.duration }}分钟 / {{ filmInfo.area }}
-            </div>
+            <div class="film-duration">{{ filmInfo.duration }}分钟 / {{ filmInfo.area }}</div>
             <!-- 上映时间 -->
-            <div class="film-publish">
-              {{ filmInfo.publish_date }}中国大陆上映
-            </div>
+            <div class="film-publish">{{ filmInfo.publish_date }}中国大陆上映</div>
             <!-- 制式 -->
             <div class="film-tags" v-if="filmInfo.version">
-              <div
-                class="film-tag"
-                v-for="(tag, i) in filmInfo.version.split(',')"
-                :key="i"
-              >
+              <div class="film-tag" v-for="(tag, i) in filmInfo.version.split(',')" :key="i">
                 {{ tag }}
               </div>
             </div>
@@ -75,10 +67,7 @@
         </div>
         <!-- 判断是否需要折叠，需要则显示折叠图标 -->
         <div class="tf-flex" v-if="collapseable">
-          <van-icon
-            :name="collapsed ? 'arrow-up' : 'arrow-down'"
-            @click="collapsed = !collapsed"
-          />
+          <van-icon :name="collapsed ? 'arrow-up' : 'arrow-down'" @click="collapsed = !collapsed" />
         </div>
       </div>
       <!-- 演职人员信息 -->
@@ -91,35 +80,29 @@
           <span class="tf-text-grey">导演：</span>{{ filmInfo.director }}
         </div>
         <div v-if="filmInfo.cast" class="van-ellipsis">
-          <span class="tf-text-grey"
-            >{{ filmInfo.cast_type == '0' ? '主演' : '配音' }}：</span
+          <span class="tf-text-grey">{{ filmInfo.cast_type == '0' ? '主演' : '配音' }}：</span
           >{{ filmInfo.cast }}
         </div>
       </div>
     </div>
-    <div class="tf-padding">
-      <button v-if="isWx" class="app-btn">
-        <wx-open-launch-app
-          id="id"
-          class="launch-btn"
-          appid="wx7245d2cb43a093db"
-          :extinfo="extinfo"
-          @error="handleErrorFn"
-          @launch="handleLaunchFn"
-        >
-          <script type="text/wxtag-template">
-            <div class="btn" style="display: flex;align-items: center;justify-content: center;height: 100%;font-size: 15px;color: #fff;">在APP内打开</div>
-          </script>
-        </wx-open-launch-app>
-      </button>
-      <button v-else @click="goApp" class="app-btn">
-        <div class="launch-btn">
-          <div class="btn">
-            在APP内打开
-          </div>
-        </div>
-      </button>
-    </div>
+    <button v-if="isWx" class="app-btn">
+      <wx-open-launch-app
+        id="id"
+        class="launch-btn"
+        appid="wx7245d2cb43a093db"
+        :extinfo="extinfo"
+        @error="handleErrorFn"
+        @launch="handleLaunchFn"
+      >
+        <script type="text/wxtag-template">
+          <div class="btn" style="color: #fff;
+          font-size: 16px">在APP内打开</div>
+        </script>
+      </wx-open-launch-app>
+    </button>
+    <button v-else @click="goApp" class="app-btn">
+      在APP内打开
+    </button>
   </div>
 </template>
 
@@ -154,7 +137,6 @@ export default {
     this.filmId = this.$route.query.id
     this.extinfo = `page_type=3&id=${this.filmId}`
     this.isWx = isWx()
-    txJssdk()
     this.getfilminfo()
   },
   mounted () {
@@ -167,12 +149,18 @@ export default {
         film_id: this.filmId
       }).then(({ data }) => {
         this.filmInfo = data
+        txJssdk({
+          title: `《${this.filmInfo.film_name}》${
+            this.filmInfo.score && this.filmInfo.score !== '0'
+              ? ' 评分' + parseFloat(this.filmInfo.score) / 10
+              : ''
+          }`,
+          desc: this.filmInfo.introduction,
+          imgUrl: this.filmInfo.thumb
+        })
         this.$nextTick(() => {
           // 描述元素如果高度大于introductionBoxHeight则需要显示折叠按钮
-          if (
-            this.$refs.introductionText.clientHeight >
-            this.introductionBoxHeight
-          ) {
+          if (this.$refs.introductionText.clientHeight > this.introductionBoxHeight) {
             this.collapseable = true
           }
         })
@@ -368,28 +356,18 @@ export default {
   }
 }
 .app-btn {
-  display: block;
-  width: 100%;
+  width: 4rem;
   height: 1.2rem;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  margin-left: -2rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.6rem;
   background-image: linear-gradient(to right, #f9866b, #eb5841);
   color: #fff;
   font-size: 0.4rem;
   text-align: center;
   z-index: 2;
-  box-shadow: 0.15rem 0.15rem 0.3rem #999;
-}
-.launch-btn {
-  width: 100%;
-  height: 100%;
-}
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-size: 30px;
-  color: #fff;
 }
 </style>

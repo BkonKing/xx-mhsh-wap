@@ -147,7 +147,11 @@ export default {
     if (this.isShare) {
       this.extinfo = `page_type=6&frameUrl=${location.href.split('?')[0]}`
       this.isWx = isWx()
-      txJssdk()
+      txJssdk({
+        title: '美好生活家园 五大中心',
+        desc: '社区居民活动中心，城市居民体验中心',
+        imgUrl: 'https://live.tosolomo.com/library/img/app_img/zhuanti.jpg'
+      })
     }
   },
   methods: {

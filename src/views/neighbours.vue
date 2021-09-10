@@ -128,7 +128,6 @@ export default {
     this.getInfo()
     this.extinfo = 'page_type=2&articleType=' + this.articleType + '&id=' + this.id
     this.isWx = isWx()
-    txJssdk()
   },
   methods: {
     // 根据类型获取对应的详情
@@ -157,6 +156,7 @@ export default {
           return
         }
         this.info = data
+        this.txJssdk()
         this.isLoading = false
       })
     },
@@ -173,6 +173,7 @@ export default {
             return
           }
           this.info = data
+          this.txJssdk()
           this.info.id = this.id
           this.isLoading = false
         })
@@ -197,7 +198,16 @@ export default {
           return
         }
         this.info = data
+        this.txJssdk()
         this.isLoading = false
+      })
+    },
+    txJssdk () {
+      txJssdk({
+        title: this.articleType == 3 ? this.info.content : this.info.title,
+        desc:
+          this.articleType == 3 ? this.info.content : this.info.title,
+        imgUrl: this.info.share_img
       })
     },
     // 跳转到app
