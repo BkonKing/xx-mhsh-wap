@@ -69,7 +69,9 @@ service.interceptors.response.use(
       })
       return Promise.reject(code)
     } else if (code != 200) {
-      Toast(message || codeMessage[code])
+      if (!config.headers.noToast) {
+        Toast(message || codeMessage[code])
+      }
       return Promise.reject(data || 'Error')
     } else {
       return config.headers.completeData ? response : data

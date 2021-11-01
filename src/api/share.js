@@ -65,3 +65,27 @@ export function getWjtpInfo (params) {
     params
   })
 }
+
+// 红包分享领取页获取分享所得幸福币
+export function getInviteReward (data) {
+  return request({
+    url: '/share/invite/hb_invite_receive_json',
+    method: 'post',
+    data,
+    headers: {
+      noToast: true
+    }
+  })
+}
+
+// 红包分享领取操作
+export function receiveInvite (data) {
+  return request({
+    url: '/share/invite/hb_invite_receive',
+    method: 'post',
+    data,
+    headers: {
+      noToast: true
+    }
+  })
+}

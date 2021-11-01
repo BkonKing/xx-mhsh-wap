@@ -84,8 +84,17 @@ const routes = [
         /* webpackChunkName: 'questionnaire' */
         '@/views/questionnaire.vue'
       )
+  },
+  // 邀请活动分享链接页面
+  {
+    path: '/invite/link',
+    name: 'inviteLink',
+    component: () =>
+      import(
+        /* webpackChunkName: 'inviteLink' */
+        '@/views/invite-link.vue'
+      )
   }
-
 ]
 
 const router = new VueRouter({
