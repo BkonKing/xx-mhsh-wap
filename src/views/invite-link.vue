@@ -78,6 +78,7 @@ export default {
   data () {
     return {
       uid: '',
+      projectId: '',
       href: '',
       isWx: false,
       isFailure: false,
@@ -93,13 +94,15 @@ export default {
   created () {
     this.href = window.location.href
     this.uid = this.$route.query.invite_uid
+    this.projectId = this.$route.query.project_id
     this.isWx = isWx()
     this.getInviteReward()
   },
   methods: {
     getInviteReward () {
       getInviteReward({
-        invite_uid: this.uid
+        invite_uid: this.uid,
+        project_id: this.projectId
       })
         .then(({ credits }) => {
           this.credits = credits || ''
@@ -113,6 +116,7 @@ export default {
     submit () {
       if (this.isSuccess) {
         openApp()
+        return
       }
       if (this.mobile && this.mobile.length === 11) {
         this.receiveInvite()
@@ -124,6 +128,7 @@ export default {
     receiveInvite () {
       receiveInvite({
         invite_uid: this.uid,
+        project_id: this.projectId,
         mobile: this.mobile
       })
         .then(({ code }) => {
