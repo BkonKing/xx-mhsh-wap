@@ -54,7 +54,7 @@
           <div>不可重复领取！</div>
         </div>
       </tf-dialog>
-      <tf-dialog v-model="isError" confirmButtonText="我知道了">
+      <tf-dialog v-model="isError" confirmButtonText="我知道了" @confirm="isError = false">
         <div class="content2">
           {{ errMessage }}
         </div>
