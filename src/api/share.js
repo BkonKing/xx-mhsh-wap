@@ -89,3 +89,12 @@ export function receiveInvite (data) {
     }
   })
 }
+
+// 免费服务列表
+export function getFreeServerList (data) {
+  return request({
+    url: '/share/freeservernotoken/getFreeServerList',
+    method: 'post',
+    data
+  })
+}

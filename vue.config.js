@@ -2,7 +2,7 @@ const path = require('path')
 const appname = 'dist' // 项目文件名
 const appPort = 8110 // 真机同步端口,浏览器打开端口。
 module.exports = {
-	publicPath: process.env.NODE_ENV === 'production' ? './' : './',
+  publicPath: process.env.NODE_ENV === 'production' ? './' : './',
   outputDir: './' + appname, // 运行时生成的生产环境构建文件的目录(默认""dist""，构建之前会被清除)
   indexPath: 'index.html', // 指定生成的 index.html 的输出路径(相对于 outputDir)也可以是一个绝对路径。
   filenameHashing: process.env.NODE_ENV === 'production', /** 开发环境关闭文件哈希值 */
@@ -60,8 +60,8 @@ module.exports = {
     proxy: {
       /** 解决本地测试跨域问题 */
       '/api': {
-        target: 'https://live.tosolomo.com/app/api/v1',
-        // target: 'http://192.168.1.103/app/api/v1',
+        // target: 'https://live.tosolomo.com/app/api/v1',
+        target: 'http://develop.mhshjy.com/app/api/v1',
         // target: 'https://test.mhshjy.com/app/api/v1',
         // target: 'https://www.fastmock.site/mock/c30751817f92f0a4855537591d860a97/app/api/v1',
         pathRewrite: {

@@ -94,6 +94,16 @@ const routes = [
         /* webpackChunkName: 'inviteLink' */
         '@/views/invite-link.vue'
       )
+  },
+  // 免费服务
+  {
+    path: '/butler/freeServer',
+    name: 'freeServer',
+    component: () =>
+      import(
+        /* webpackChunkName: 'freeServer' */
+        '@/views/freeServer.vue'
+      )
   }
 ]
 
