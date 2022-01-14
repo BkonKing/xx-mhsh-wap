@@ -104,6 +104,16 @@ const routes = [
         /* webpackChunkName: 'freeServer' */
         '@/views/freeServer.vue'
       )
+  },
+  // 免费服务
+  {
+    path: '/20220115activity',
+    name: '20220115activity',
+    component: () =>
+      import(
+        /* webpackChunkName: '20220115activity' */
+        '@/views/20220115.vue'
+      )
   }
 ]
 
