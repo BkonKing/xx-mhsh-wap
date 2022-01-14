@@ -105,7 +105,7 @@ const routes = [
         '@/views/freeServer.vue'
       )
   },
-  // 免费服务
+  // 海丝活动
   {
     path: '/20220115activity',
     name: '20220115activity',
