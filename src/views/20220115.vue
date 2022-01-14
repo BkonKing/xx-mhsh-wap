@@ -87,4 +87,8 @@ export default {
   bottom: 4.93333rem;
   opacity: 0;
 }
+.launch-btn {
+  width: 100%;
+  height: 100%;
+}
 </style>
