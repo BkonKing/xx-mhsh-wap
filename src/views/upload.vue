@@ -34,7 +34,7 @@ export default {
     if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
       this.downUrl = 'https://apps.apple.com/cn/app/%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E5%AE%B6%E5%9B%AD/id1457806538'
     } else if (navigator.userAgent.match(/android/i)) {
-      this.downUrl = 'https://downloadpkg.app3c.cn/app/download?path=https://A6040369256280.qiniucdn.apicloud-system.com/2cf94dbb7011a54815c5d2b73a8d607c_d'
+      this.downUrl = '/app_download/downpage'
     }
   },
   methods: {
