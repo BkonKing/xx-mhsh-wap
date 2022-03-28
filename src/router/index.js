@@ -114,6 +114,16 @@ const routes = [
         /* webpackChunkName: '20220115activity' */
         '@/views/20220115.vue'
       )
+  },
+  // 专题活动
+  {
+    path: '/activity/special',
+    name: 'activitySpecial',
+    component: () =>
+      import(
+        /* webpackChunkName: 'activitySpecial' */
+        '@/views/special.vue'
+      )
   }
 ]
 

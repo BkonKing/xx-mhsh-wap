@@ -98,3 +98,12 @@ export function getFreeServerList (data) {
     data
   })
 }
+
+// 专题服务
+export function getSpecial (data) {
+  return request({
+    url: '/share/goods/thematic_info',
+    method: 'post',
+    data
+  })
+}
